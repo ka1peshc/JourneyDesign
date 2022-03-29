@@ -17,7 +17,7 @@ export class ControlFlowActivities implements WorkflowPlugin {
   private fork = (): ActivityDefinition => ({
     type: "Fork",
     displayName: "Fork",
-    description: "Fork workflow execution into multiple branches.",
+    description: "Developer's take copy of source code.",
     category: ControlFlowActivities.Category,
     icon: 'fas fa-code-branch fa-rotate-180',
     outcomes: 'x => x.state.branches',
@@ -32,7 +32,7 @@ export class ControlFlowActivities implements WorkflowPlugin {
   private ifElse = (): ActivityDefinition => ({
     type: "IfElse",
     displayName: "If/Else",
-    description: "Evaluate a Boolean expression and continue execution depending on the result.",
+    description: "Condition station",
     category: ControlFlowActivities.Category,
     runtimeDescription: 'x => !!x.state.expression ? `Evaluate <strong>${ x.state.expression.expression }</strong> and continue execution depending on the result.` : x.definition.description',
     outcomes: [OutcomeNames.True, OutcomeNames.False],
@@ -62,7 +62,7 @@ export class ControlFlowActivities implements WorkflowPlugin {
 
   private switch = (): ActivityDefinition => ({
     type: "Switch",
-    displayName: "Switch",
+    displayName: "Switch Cases",
     description: "Switch execution based on a given expression.",
     category: ControlFlowActivities.Category,
     icon: 'far fa-list-alt',

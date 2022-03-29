@@ -15,8 +15,8 @@ export class HttpActivities implements WorkflowPlugin {
 
   private sendHttpRequest = (): ActivityDefinition => ({
     type: "HttpRequestAction",
-    displayName: "Send HTTP Request",
-    description: "Send an HTTP request.",
+    displayName: "Send API Request",
+    description: "Send an API request.",
     category: HttpActivities.Category,
     icon: 'fas fa-cloud',
     properties: [{
@@ -50,8 +50,8 @@ export class HttpActivities implements WorkflowPlugin {
 
   private handleHttpRequest = (): ActivityDefinition => ({
     type: "HttpRequestEvent",
-    displayName: "Handle HTTP Request",
-    description: "Handle an incoming HTTP request.",
+    displayName: "Handle API Request",
+    description: "Handle an incoming API request.",
     category: HttpActivities.Category,
     icon: 'fas fa-cloud',
     properties: [{
@@ -64,7 +64,7 @@ export class HttpActivities implements WorkflowPlugin {
         name: 'method',
         type: 'select',
         label: 'Method',
-        hint: 'The HTTP method that triggers this activity.',
+        hint: 'The API method that triggers this activity.',
         options: {
           items: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD']
         }
@@ -73,7 +73,7 @@ export class HttpActivities implements WorkflowPlugin {
         name: 'readContent',
         type: 'boolean',
         label: 'Read Content',
-        hint: 'Check if the HTTP request content body should be read and stored as part of the HTTP request model. The stored format depends on the content-type header.'
+        hint: 'Check if the API request content body should be read and stored as part of the API request model. The stored format depends on the content-type header.'
       }],
     runtimeDescription: `x => !!x.state.path ? \`Handle <strong>\${ x.state.method } \${ x.state.path }</strong>.\` : x.definition.description`,
     outcomes: [OutcomeNames.Done]
@@ -81,8 +81,8 @@ export class HttpActivities implements WorkflowPlugin {
 
   private sendHttpResponse = (): ActivityDefinition => ({
     type: "HttpResponseAction",
-    displayName: "Send HTTP Response",
-    description: "Send an HTTP response.",
+    displayName: "Send API Response",
+    description: "Send an API response.",
     category: HttpActivities.Category,
     icon: 'fas fa-cloud',
     properties: [{

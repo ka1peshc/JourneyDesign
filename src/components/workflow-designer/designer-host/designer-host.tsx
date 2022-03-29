@@ -14,11 +14,16 @@ import '../../../plugins/primitives-activities';
 import '../../../plugins/timer-activities';
 import {
   BooleanFieldDriver,
+  CommunicationFieldDriver,
+  DelayFieldDriver,
   ExpressionFieldDriver,
+  IncentiveFieldDriver,
   ListFieldDriver,
   SelectFieldDriver,
+  SingleCriteriaFieldDriver,
   TextFieldDriver
 } from "../../../drivers";
+import { SingleCriteriaField } from '../../field-editors/single-criteria-field/single-criteria-field';
 
 @Component({
   tag: 'wf-designer-host',
@@ -100,6 +105,21 @@ export class DesignerHost {
     this.designer.workflow = deepClone(e.detail);
   }
 
+  @Listen('displayWorkflow', {target:'body'})
+    displayWorkflowHandler(event: CustomEvent<Workflow>){
+        this.workflow = event.detail;
+    }
+
+  // @Listen('InputWorkflow')
+  // async inputByTable(e: CustomEvent<Workflow>) {
+  //   this.designer.workflow = deepClone(e.detail);
+  // }
+
+  // @Listen('searchWorldNameSelected')
+  // async onDataFlow(e: CustomEvent<Workflow>){
+  //   this.designer.workflow = deepClone(e.detail);
+  // }
+
   @Event()
   workflowChanged: EventEmitter;
 
@@ -130,10 +150,15 @@ export class DesignerHost {
 
   private initFieldDrivers = () => {
     DisplayManager.addDriver('text', new TextFieldDriver());
+    DisplayManager.addDriver('number', new TextFieldDriver());
     DisplayManager.addDriver('expression', new ExpressionFieldDriver());
     DisplayManager.addDriver('list', new ListFieldDriver());
     DisplayManager.addDriver('boolean', new BooleanFieldDriver());
     DisplayManager.addDriver('select', new SelectFieldDriver());
+    DisplayManager.addDriver('communication',new CommunicationFieldDriver());
+    DisplayManager.addDriver('incentive',new IncentiveFieldDriver());
+    DisplayManager.addDriver('singleCriteria',new SingleCriteriaFieldDriver());
+    DisplayManager.addDriver('delay',new DelayFieldDriver());
   };
 
   private initWorkflow = () => {

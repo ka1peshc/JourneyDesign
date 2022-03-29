@@ -24,7 +24,7 @@ export class ImportExport {
     if (!!blobUrl) {
       window.URL.revokeObjectURL(blobUrl)
     }
-
+  
     const workflow = designer.workflow;
     const data = this.serialize(workflow, formatDescriptor.format);
     const blob = new Blob([data], { type: formatDescriptor.mimeType });
@@ -33,11 +33,13 @@ export class ImportExport {
 
     const downloadLink = document.createElement('a');
     downloadLink.setAttribute('href', blobUrl);
-    downloadLink.setAttribute('download', `workflow.${ formatDescriptor.fileExtension }`);
+    downloadLink.setAttribute('download', `kalpesh.${ formatDescriptor.fileExtension }`);
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+    console.log("In export component");
+    this.sendWorkflow(data,"testfile");
   }
 
   @Method()
@@ -89,4 +91,25 @@ export class ImportExport {
         return workflow;
     }
   };
+
+  private sendWorkflow = (data: string, titleName: string) => {
+    console.log("In send workflow");
+    console.log(data);
+
+    //API call post method
+    fetch("https://localhost:7003/api/JsonApi/SaveJsonData", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "title": "Test file",
+      "useCaseBody": JSON.parse(data)
+    }),
+    }).then(response => response.json())
+    // Displaying results to console
+    .then(json => console.log(json));
+
+  }
 }

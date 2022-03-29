@@ -11,24 +11,24 @@ export class ConsoleActivities implements WorkflowPlugin {
 
   private readLine = (): ActivityDefinition => ({
     type: 'ReadLine',
-    displayName: 'Read Line',
-    description: 'Read text from standard in.',
-    runtimeDescription: 'a => !!a.state.variableName ? `Read text from standard in and store into <strong>${ a.state.variableName }</strong>.` : \'Read text from standard in.\'',
+    displayName: 'Read Process',
+    description: 'Read process.',
+    runtimeDescription: 'a => !!a.state.variableName ? `Read process and store into <strong>${ a.state.variableName }</strong>.` : \'Read text from standard in.\'',
     outcomes: [OutcomeNames.Done],
     category: ConsoleActivities.Category,
     icon: 'fas fa-terminal',
     properties: [{
       name: 'variableName',
       type: 'text',
-      label: 'Variable Name',
-      hint: 'The name of the variable to store the value into.'
+      label: 'Process Name',
+      hint: 'The name of the process to store the value into.'
     }]
   });
 
   private writeLine = (): ActivityDefinition => ({
     type: 'WriteLine',
-    displayName: 'Write Line',
-    description: 'Write text to standard out.',
+    displayName: 'Write Process',
+    description: 'Write a process.',
     category: ConsoleActivities.Category,
     icon: 'fas fa-terminal',
     runtimeDescription: `x => !!x.state.textExpression ? \`Write <strong>\${ x.state.textExpression.expression }</strong> to standard out.\` : x.definition.description`,
@@ -36,7 +36,7 @@ export class ConsoleActivities implements WorkflowPlugin {
     properties: [{
       name: 'textExpression',
       type: 'expression',
-      label: 'Text',
+      label: 'Process',
       hint: 'The text to write.'
     }]
   });

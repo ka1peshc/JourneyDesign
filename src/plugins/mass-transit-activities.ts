@@ -29,8 +29,8 @@ export class MassTransitActivities implements WorkflowPlugin {
 
   private sendMassTransitMessage = (): ActivityDefinition => ({
     type: "SendMassTransitMessage",
-    displayName: "Send MassTransit Message",
-    description: "Send a message via MassTransit.",
+    displayName: "Send Bulk Message",
+    description: "Send a Bulk message via MassTransit.",
     category: MassTransitActivities.Category,
     icon: 'fas fa-envelope',
     properties: [{

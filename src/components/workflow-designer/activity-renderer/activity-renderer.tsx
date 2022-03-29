@@ -4,6 +4,7 @@ import {
   ActivityDefinition,
   ActivityDisplayMode
 } from "../../../models";
+
 import ActivityManager from '../../../services/activity-manager';
 import DisplayManager from '../../../services/display-manager';
 
@@ -47,6 +48,9 @@ export class ActivityRenderer {
         <h5><i class={iconClass}/>{result.title}</h5>
         <p innerHTML={result.description}/>
       </div>
+      // <div class="greenBox">
+      //   <p innerHTML={result.description}></p>
+      // </div>
     );
   }
 

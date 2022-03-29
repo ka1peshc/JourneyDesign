@@ -1,4 +1,4 @@
-import { OutcomeNames } from "../models/outcome-names";
+ import { OutcomeNames } from "../models/outcome-names";
 import { WorkflowPlugin } from "../models";
 import { ActivityDefinition } from "../models";
 import pluginStore from '../services/workflow-plugin-store';
@@ -7,19 +7,26 @@ export class PrimitiveActivities implements WorkflowPlugin {
   private static readonly Category: string = "Primitives";
 
   getName = (): string => "PrimitiveActivities";
-  getActivityDefinitions = (): Array<ActivityDefinition> => ([this.log(), this.setVariable()]);
+  getActivityDefinitions = (): Array<ActivityDefinition> => (
+    [this.log(), 
+      this.setVariable(), 
+      this.setCommunication(),
+      this.setIncentive(),
+      this.setSingleCriteria(),
+      this.setDelay()
+    ]);
 
   private log = (): ActivityDefinition => ({
     type: "Log",
-    displayName: "Log",
-    description: "Log a message.",
+    displayName: "Activity logger",
+    description: "Log any activity.",
     category: PrimitiveActivities.Category,
     icon: 'fas fa-feather-alt',
     properties: [{
       name: 'message',
       type: 'text',
       label: 'Message',
-      hint: 'The text to log.'
+      hint: 'The text to log.' 
     },
       {
         name: 'logLevel',
@@ -50,6 +57,94 @@ export class PrimitiveActivities implements WorkflowPlugin {
     runtimeDescription: 'x => !!x.state.variableName ? `${x.state.expression.syntax}: <strong>${x.state.variableName}</strong> = <strong>${x.state.expression.expression}</strong>` : x.definition.description',
     outcomes: [OutcomeNames.Done]
   });
+
+  private setCommunication = (): ActivityDefinition => ({
+    type: "Communication",
+    displayName: "Communication",
+    description: "Welcome to ",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    },
+      {
+      name: 'communication',
+      type: 'communication',
+      label: 'Communication Expression',
+      hint: 'Set of statements'
+    }],
+    runtimeDescription: 'x => !!x.state.communication ? `<b>State: ${x.state.stateCount}</b><br/><strong>${ x.state.communication.expression }</strong> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  private setIncentive = (): ActivityDefinition => ({
+    type: "Incentive",
+    displayName: "Incentive",
+    description: "incentive description ",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    },{
+      name: 'incentive',
+      type: 'incentive',
+      label: 'Incentive Expression',
+      hint: 'Set of statement involve regarding points'
+    }],
+    runtimeDescription: 'x => !!x.state.incentive ? `<b>State: ${x.state.stateCount}</b><br/><strong>${ x.state.incentive.expression }</strong> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  private setSingleCriteria = (): ActivityDefinition => ({
+    type: "SingleCriteria",
+    displayName: "Single Criteria",
+    description: "Select criteria",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    },
+      {
+      name: 'singleCriteria',
+      type: 'singleCriteria',
+      label: 'Criteria Expression',
+      hint: 'Set of statements'
+    }],
+    runtimeDescription: 'x => !!x.state.singleCriteria ? `<b>State: ${x.state.stateCount}</b><br/><strong>${ x.state.singleCriteria.expression }</strong> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  private setDelay = (): ActivityDefinition => ({
+    type: "Delay",
+    displayName: "Delay timer",
+    description: "Add delay in workflow",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-hourglass-start",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    },
+      {
+      name: 'delay',
+      type: 'delay',
+      label: 'Delay timer',
+      hint: 'Set of delay time period'
+    }],
+    runtimeDescription: 'x => !!x.state.delay ? `<b>State: ${x.state.stateCount}</b><br/><strong>${ x.state.delay.expression }</strong> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
 }
 
 pluginStore.add(new PrimitiveActivities());
