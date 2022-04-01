@@ -77,19 +77,22 @@ export namespace Components {
   interface WfDesignerHost {
     'activityDefinitionsData': string;
     'canvasHeight': string;
-    'export': (formatDescriptor: WorkflowFormatDescriptor) => Promise<void>;
+    'export': (formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
     'getWorkflow': () => Promise<any>;
     'import': () => Promise<void>;
     'newWorkflow': () => Promise<void>;
     'pluginsData': string;
     'readonly': boolean;
+    'setWorkflowName': (name: string) => Promise<void>;
     'showActivityPicker': () => Promise<void>;
     'workflow': Workflow;
     'workflowData': string;
+    'workflowName': string;
   }
   interface WfExportButton {
     'designerHostId': string;
     'workflowFormats': WorkflowFormatDescriptorDictionary;
+    'workflowName': string;
   }
   interface WfExpressionField {
     'hint': string;
@@ -100,7 +103,7 @@ export namespace Components {
     'value': string;
   }
   interface WfImportExport {
-    'export': (designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor) => Promise<void>;
+    'export': (designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
     'import': (data?: ImportedWorkflowData) => Promise<void>;
   }
   interface WfIncentiveField {
@@ -363,11 +366,13 @@ declare namespace LocalJSX {
     'readonly'?: boolean;
     'workflow'?: Workflow;
     'workflowData'?: string;
+    'workflowName'?: string;
   }
   interface WfExportButton extends JSXBase.HTMLAttributes<HTMLWfExportButtonElement> {
     'designerHostId'?: string;
     'onExport'?: (event: CustomEvent<any>) => void;
     'workflowFormats'?: WorkflowFormatDescriptorDictionary;
+    'workflowName'?: string;
   }
   interface WfExpressionField extends JSXBase.HTMLAttributes<HTMLWfExpressionFieldElement> {
     'hint'?: string;

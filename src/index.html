@@ -43,11 +43,14 @@
   <h5 class="my-0 mr-md-auto font-weight-normal">Workflow Designer</h5>
 
   <ul class="nav">
+    <!-- <li class="nav-item">
+      <button class="btn btn-primary" onclick="sendWorkflowName()">show name</button>
+    </li> -->
     <li class="nav-item">
       <button class="btn btn-primary" onclick="addActivity()">Add Activity</button>
     </li>
     <li class="nav-item">
-      <wf-export-button workflow-designer-host="designerHost"></wf-export-button>
+      <wf-export-button id="exportBtn" workflow-designer-host="designerHost" onclick="sendWorkflowName()" ></wf-export-button>
     </li>
     <li class="nav-item">
       <button class="btn btn-secondary" onclick="importWorkflow()">Import</button>
@@ -64,7 +67,7 @@
       
       <div class="row">
         <label>Enter workflow name</label>
-        <input id="workflowName" type="text"/>
+        <input id="workflowName" type="text" onblur="getVal()"/>
       </div>
       <div class="card">
         <wf-designer-host
@@ -72,7 +75,7 @@
           canvas-height="300vh"
           plugins="PrimitiveActivities ControlFlowActivities EmailActivities HttpActivities ConsoleActivities MassTransitActivities TimerActivities"
           data-activity-definitions='[{"type": "Custom", "displayName": "Custom", "description": "Custom Activity", "category": "Custom", "designer": { "outcomes": ["Done"] }}]'
-          data-workflow='{"activities":[{"id":"4486c271-e663-44be-87e3-b219bcd62649","top":1,"left":35,"type":"Communication","state":{"textExpression":null,"communication":{"expression":"welcome to program","syntax":"welcome to program"},"incentive":null,"delay":null,"singleCriteria":null,"stateCount":"1"}},{"id":"2a0a1584-d251-45e8-b83b-0b27d2f6c804","top":54,"left":361,"type":"Communication","state":{"textExpression":null,"communication":{"expression":"referral code","syntax":"referral code"},"incentive":null,"delay":null,"singleCriteria":null,"stateCount":"2"}},{"id":"dcc68423-da73-457c-8b77-489abef7a2a5","top":80,"left":644,"type":"Communication","state":{"textExpression":null,"communication":{"expression":"custom profile update silver","syntax":"custom profile update silver"},"incentive":null,"delay":null,"singleCriteria":null,"stateCount":"3"}},{"id":"d4e76b4a-784e-4cd8-8920-ad3525eea9f3","top":187,"left":810,"type":"Delay","state":{"textExpression":null,"communication":null,"incentive":null,"delay":{"expression":"Time - 3 Days","syntax":"welcome to program"},"singleCriteria":null,"stateCount":"4"}},{"id":"72cc77d5-12cd-453c-b366-b994104a1501","top":204,"left":311,"type":"Communication","state":{"textExpression":null,"communication":{"expression":"custom orra website msg","syntax":"custom orra website msg"},"incentive":null,"delay":null,"singleCriteria":null,"stateCount":"5"}},{"id":"a0c625fd-99ba-4999-af1e-82c2c7fc0829","top":372,"left":411,"type":"Delay","state":{"textExpression":null,"communication":null,"incentive":null,"delay":{"expression":"Profile updated & 12 Days","syntax":"Profile updated & 12 Days"},"singleCriteria":null,"stateCount":"6"}},{"id":"57a25156-ce7c-4799-855c-225dbe1c535b","top":365,"left":693,"type":"Incentive","state":{"textExpression":null,"communication":null,"incentive":{"expression":"Profile update points","syntax":"Profile update points"},"delay":null,"singleCriteria":null,"stateCount":"7"}}],"connections":[{"sourceActivityId":"4486c271-e663-44be-87e3-b219bcd62649","destinationActivityId":"2a0a1584-d251-45e8-b83b-0b27d2f6c804","outcome":"Done"},{"sourceActivityId":"2a0a1584-d251-45e8-b83b-0b27d2f6c804","destinationActivityId":"dcc68423-da73-457c-8b77-489abef7a2a5","outcome":"Done"},{"sourceActivityId":"dcc68423-da73-457c-8b77-489abef7a2a5","destinationActivityId":"d4e76b4a-784e-4cd8-8920-ad3525eea9f3","outcome":"Done"},{"sourceActivityId":"d4e76b4a-784e-4cd8-8920-ad3525eea9f3","destinationActivityId":"72cc77d5-12cd-453c-b366-b994104a1501","outcome":"Done"},{"sourceActivityId":"72cc77d5-12cd-453c-b366-b994104a1501","destinationActivityId":"a0c625fd-99ba-4999-af1e-82c2c7fc0829","outcome":"Done"},{"sourceActivityId":"a0c625fd-99ba-4999-af1e-82c2c7fc0829","destinationActivityId":"57a25156-ce7c-4799-855c-225dbe1c535b","outcome":"Done"}]}'
+          data-workflow=''
           readonly="false"
         >
         </wf-designer-host>
@@ -86,6 +89,11 @@
 
 <script type="text/javascript">
     const designer = document.querySelector("#designerHost");
+    let workflowName = ""
+    const btn = document.getElementById('#exportBtn');
+    function getVal() {
+      workflowName = document.querySelector('input').value;
+    }
 
     function addActivity() {
         designer.showActivityPicker();
@@ -98,6 +106,14 @@
 
     function importWorkflow() {
         designer.import();
+    }
+
+    function sendWorkflowName(){
+        document.querySelector('input').value="";
+        designer.setWorkflowName(workflowName);
+        // console.log()
+        // designer.setWorkflowName(document.getElementById('#workflowName').innerText());
+        // alert(document.getElementById('#workflowName').innerText);
     }
 
 </script>

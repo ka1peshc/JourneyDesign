@@ -35,7 +35,7 @@ export class DesignerHost {
   activityEditor: HTMLWfActivityEditorElement;
   activityPicker: HTMLWfActivityPickerElement;
   designer: HTMLWfDesignerElement;
-  importExport: HTMLWfImportExportElement;
+   importExport: HTMLWfImportExportElement;
 
   @Element() el: HTMLElement;
   @State() activityDefinitions: Array<ActivityDefinition> = [];
@@ -45,6 +45,13 @@ export class DesignerHost {
   @Prop({ attribute: "data-workflow" }) workflowData: string;
   @Prop({ attribute: "readonly" }) readonly: boolean;
   @Prop({ attribute: "plugins" }) pluginsData: string;
+  @Prop() workflowName: string = "workflow";
+
+  @Method()
+  setWorkflowName(name: string){
+    this.workflowName = name;
+    // alert("In designer host "+this.workflowName);
+  }
 
   @Method()
   async newWorkflow() {
@@ -60,10 +67,10 @@ export class DesignerHost {
   async showActivityPicker() {
     await this.activityPicker.show();
   }
-
+  //this method calls export button from import-export.tsx/export function
   @Method()
-  async export(formatDescriptor: WorkflowFormatDescriptor) {
-    await this.importExport.export(this.designer, formatDescriptor);
+  async export(formatDescriptor: WorkflowFormatDescriptor, wfName: string) {
+    await this.importExport.export(this.designer, formatDescriptor,this.workflowName);
   }
 
   @Method()
@@ -97,7 +104,7 @@ export class DesignerHost {
     if (!this.importExport)
       return;
 
-    await this.importExport.export(this.designer, e.detail);
+    await this.importExport.export(this.designer, e.detail,this.workflowName);
   }
 
   @Listen('import-workflow')

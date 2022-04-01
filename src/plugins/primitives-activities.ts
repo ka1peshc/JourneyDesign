@@ -13,7 +13,10 @@ export class PrimitiveActivities implements WorkflowPlugin {
       this.setCommunication(),
       this.setIncentive(),
       this.setSingleCriteria(),
-      this.setDelay()
+      this.setDelay(),
+      this.setEnrolment(),
+      this.setEject(),
+      this.multipleCriteria()
     ]);
 
   private log = (): ActivityDefinition => ({
@@ -145,6 +148,59 @@ export class PrimitiveActivities implements WorkflowPlugin {
     outcomes: [OutcomeNames.Done]
   });
 
+  private setEnrolment = (): ActivityDefinition => ({
+    type: "Enrolment",
+    displayName: "Enrolment",
+    description: "Entry point of the workflow",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    }],
+    runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  private setEject = (): ActivityDefinition => ({
+    type: "Eject",
+    displayName: "Eject",
+    description: "Exit point of the workflow",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    }],
+    runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  private multipleCriteria = (): ActivityDefinition => ({
+    type: "Multiple Criteria",
+    displayName: "Multiple Criteria",
+    description: "Select multiple criteria",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-envelope-open-text",
+    properties: [{
+      name: 'stateCount',
+      type:'number',
+      label: 'State',
+      hint: 'Sequence number of node in flow chart.'
+    },
+      {
+      name: 'firstCriteria',
+      type: 'firstCriteria',
+      label: 'Criteria Expression',
+      hint: 'Set of statements'
+    }],
+    runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b>` : x.definition.description',
+    outcomes: [OutcomeNames.Done,OutcomeNames.Done]
+  });
 }
 
 pluginStore.add(new PrimitiveActivities());

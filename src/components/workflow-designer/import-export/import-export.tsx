@@ -18,7 +18,7 @@ export class ImportExport {
   importEvent: EventEmitter<Workflow>;
 
   @Method()
-  async export(designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor) {
+  async export(designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor,wfName: string) {
     let blobUrl = this.blobUrl;
 
     if (!!blobUrl) {
@@ -31,15 +31,16 @@ export class ImportExport {
 
     this.blobUrl = blobUrl = window.URL.createObjectURL(blob);
 
-    const downloadLink = document.createElement('a');
-    downloadLink.setAttribute('href', blobUrl);
-    downloadLink.setAttribute('download', `kalpesh.${ formatDescriptor.fileExtension }`);
+    // const downloadLink = document.createElement('a');
+    // downloadLink.setAttribute('href', blobUrl);
+    // downloadLink.setAttribute('download', `kalpesh.${ formatDescriptor.fileExtension }`);
 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    console.log("In export component");
-    this.sendWorkflow(data,"testfile");
+    // document.body.appendChild(downloadLink);
+    // downloadLink.click();
+    // document.body.removeChild(downloadLink);
+    // console.log("In export component");
+    //alert("In import-export.tsx"+wfName);
+    this.sendWorkflow(data,wfName);
   }
 
   @Method()
@@ -104,12 +105,15 @@ export class ImportExport {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "title": "Test file",
+      "title": titleName,
       "useCaseBody": JSON.parse(data)
     }),
     }).then(response => response.json())
     // Displaying results to console
-    .then(json => console.log(json));
+    .then(json => {
+      console.log(json);
+      alert("successfully inserted record");
+    });
 
   }
 }

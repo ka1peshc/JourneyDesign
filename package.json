@@ -43,13 +43,14 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@stencil/router": "^1.0.1",
     "bootstrap": "^4.3.1",
     "dragscroll": "0.0.8",
     "handlebars": "^4.4.2",
     "jquery": "^3.4.1",
+    "json2yaml": "^1.1.0",
     "jsplumb": "^2.11.1",
     "popper.js": "^1.15.0",
-    "json2yaml": "^1.1.0",
     "uuid-browser": "^3.1.0"
   },
   "directories": {

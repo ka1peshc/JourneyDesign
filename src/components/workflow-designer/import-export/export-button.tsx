@@ -19,6 +19,9 @@ export class ExportButton {
   @Prop({ attribute: 'workflow-designer-host' })
   designerHostId: string;
 
+  @Prop({ attribute: 'workflow-name' })
+  workflowName: string = "Test Name from prop";
+
   @Prop()
   workflowFormats: WorkflowFormatDescriptorDictionary = {
     json: {
@@ -77,7 +80,7 @@ export class ExportButton {
 
     const host = this.getWorkflowHost();
     if (!!host) {
-      await host.export(descriptor);
+      await host.export(descriptor,"wfName Hello world");
     }
   }
 
