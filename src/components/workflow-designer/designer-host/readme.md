@@ -7,14 +7,15 @@
 
 ## Properties
 
-| Property                  | Attribute                   | Description | Type                                                     | Default     |
-| ------------------------- | --------------------------- | ----------- | -------------------------------------------------------- | ----------- |
-| `activityDefinitionsData` | `data-activity-definitions` |             | `string`                                                 | `undefined` |
-| `canvasHeight`            | `canvas-height`             |             | `string`                                                 | `undefined` |
-| `pluginsData`             | `plugins`                   |             | `string`                                                 | `undefined` |
-| `readonly`                | `readonly`                  |             | `boolean`                                                | `undefined` |
-| `workflow`                | --                          |             | `{ activities: Activity[]; connections: Connection[]; }` | `undefined` |
-| `workflowData`            | `data-workflow`             |             | `string`                                                 | `undefined` |
+| Property                  | Attribute                   | Description | Type                                                     | Default      |
+| ------------------------- | --------------------------- | ----------- | -------------------------------------------------------- | ------------ |
+| `activityDefinitionsData` | `data-activity-definitions` |             | `string`                                                 | `undefined`  |
+| `canvasHeight`            | `canvas-height`             |             | `string`                                                 | `undefined`  |
+| `pluginsData`             | `plugins`                   |             | `string`                                                 | `undefined`  |
+| `readonly`                | `readonly`                  |             | `boolean`                                                | `undefined`  |
+| `workflow`                | --                          |             | `{ activities: Activity[]; connections: Connection[]; }` | `undefined`  |
+| `workflowData`            | `data-workflow`             |             | `string`                                                 | `undefined`  |
+| `workflowName`            | `workflow-name`             |             | `string`                                                 | `"workflow"` |
 
 
 ## Events
@@ -26,7 +27,7 @@
 
 ## Methods
 
-### `export(formatDescriptor: WorkflowFormatDescriptor) => Promise<void>`
+### `export(formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>`
 
 
 
@@ -66,6 +67,16 @@ Type: `Promise<void>`
 
 
 
+### `setWorkflowName(name: string) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `showActivityPicker() => Promise<void>`
 
 
@@ -78,6 +89,11 @@ Type: `Promise<void>`
 
 
 ## Dependencies
+
+### Used by
+
+ - [wf-json-viewer](..\..\view-json)
+ - [wf-tables-field](..\..\display-json)
 
 ### Depends on
 
@@ -97,6 +113,8 @@ graph TD;
   wf-designer --> wf-context-menu
   wf-designer --> wf-context-menu-item
   wf-designer --> wf-activity-renderer
+  wf-json-viewer --> wf-designer-host
+  wf-tables-field --> wf-designer-host
   style wf-designer-host fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

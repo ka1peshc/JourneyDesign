@@ -46,8 +46,8 @@ export class ActivityRenderer {
     return (
       <div class="fl-rw">
         <div class="circleIcon"><h4><i class={iconClass}/></h4></div>
-        {/* <h5 class="circleIcon"><i class={iconClass}/>{result.title}</h5> */}
-        <div class="pd-lt">
+        
+        <div>
         <h5>{result.title}</h5>
         <p innerHTML={result.description}/>
         </div>

@@ -34,6 +34,55 @@
       color: white;
     }
 
+    .input-group {
+      position: relative;
+      width: 250px;
+      height: 50px;
+      margin: 10px 15px 0px 0px;
+      }
+
+      .input-group .input-area {
+      width: 250px;
+      height: 50px;
+      outline: none;
+      border: 1px solid #EEEEEE;
+      padding: 12px 0px 15px 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      }
+
+      .input-group .input-area:valid + .label {
+      top: -8px;
+      padding: 0 3px;
+      font-size: 14px;
+      color: #212529;
+      }
+
+      .input-group .input-group-big .input-area:focus {
+      border: 2px solid #101010;
+      color: #101010
+      }
+      .input-group .input-area:hover {
+      border: 1px solid #101010;
+    }
+
+    .input-group .label {
+    color: #BCBCBC;
+    position: absolute;
+    font-weight: 100;
+    top: 12px;
+    left: 13px;
+    background: #ffffff;
+    transition: .2s;
+    }
+
+    .input-group .input-area:focus + .label {
+    top: -8px;
+    padding: 0 3px;
+    font-size: 14px;
+    color: #101010;
+    }
+
   </style>
 </head>
 <body>
@@ -65,11 +114,13 @@
   <div class="row">
     <div class="col-12">
       
-      <div class="row">
-        <label>Enter workflow name</label>
-        <input id="workflowName" type="text" onblur="getVal()"/>
+      <div class="input-group">
+        <input type="text" class="input-area" required id="inputField" onblur="getVal()" required/>
+        <label for="inputField" class="label">Workflow name</label>
       </div>
+      <br/>
       <div class="card">
+        
         <wf-designer-host
           id="designerHost"
           canvas-height="300vh"
@@ -109,7 +160,7 @@
     }
 
     function sendWorkflowName(){
-        document.querySelector('input').value="";
+        //document.querySelector('input').value="";
         designer.setWorkflowName(workflowName);
         // console.log()
         // designer.setWorkflowName(document.getElementById('#workflowName').innerText());

@@ -14,7 +14,7 @@
 
 ## Methods
 
-### `export(designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor) => Promise<void>`
+### `export(designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>`
 
 
 

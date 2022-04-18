@@ -40,7 +40,13 @@ export class ImportExport {
     // document.body.removeChild(downloadLink);
     // console.log("In export component");
     //alert("In import-export.tsx"+wfName);
-    this.sendWorkflow(data,wfName);
+    if(wfName != "" ){
+      this.sendWorkflow(data,wfName);
+    }
+    else{
+      alert("Enter workflow name");
+    }
+    
   }
 
   @Method()

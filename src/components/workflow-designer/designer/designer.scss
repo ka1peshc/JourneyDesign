@@ -111,10 +111,10 @@
   background-color: transparent;
 }
 
-// .jtk-endpoint {
-//   svg {
-//     circle{
-//       display: none;
-//     }
-//   }
-// }
+.jtk-endpoint {
+  svg {
+    circle{
+      opacity: 0.5;
+    }
+  }
+}

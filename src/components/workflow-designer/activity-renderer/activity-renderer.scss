@@ -4,11 +4,10 @@
     align-items: center;
 }
 .pd-lt {
-    padding-left: 26px;
+    padding-left: 16px;
 }
 .circleIcon {
     position: absolute;
-    
     left: -26px;
     background: #00B894;
     width: 50px;
@@ -18,4 +17,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.circleIcon{
+    .fas{
+        color:white;
+    }
 }
