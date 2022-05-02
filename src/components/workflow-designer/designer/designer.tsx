@@ -15,11 +15,15 @@ import {Activity, ActivityDefinition, ActivityDisplayMode, Point, Workflow} from
 import ActivityManager from '../../../services/activity-manager';
 import {deepClone} from "../../../utils/deep-clone";
 
+
+let sNumber: number = 0;
+
 @Component({
   tag: 'wf-designer',
   styleUrl: 'designer.scss',
   shadow: false
 })
+
 export class Designer {
 
   canvas: HTMLElement;
@@ -74,9 +78,10 @@ export class Designer {
       top: top,
       left: left,
       type: activityDefinition.type,
-      state: {}
+      state: {},
+      stateNumber: sNumber+1
     };
-
+    sNumber += 1;
     this.lastClickedLocation = null;
 
     const activities = [...this.workflow.activities, activity];

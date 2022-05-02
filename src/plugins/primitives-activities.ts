@@ -88,7 +88,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Incentive",
     description: "incentive description ",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-envelope-open-text",
+    icon:"fas fa-gift",
     properties: [{
       name: 'stateCount',
       type:'number',
@@ -109,7 +109,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Single Criteria",
     description: "Select criteria",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-envelope-open-text",
+    icon:"fas fa-filter",
     properties: [{
       name: 'stateCount',
       type:'number',
@@ -131,7 +131,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Delay timer",
     description: "Add delay in workflow",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-hourglass-start",
+    icon:"fas fa-clock",
     properties: [{
       name: 'stateCount',
       type:'number',
@@ -169,7 +169,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Eject",
     description: "Exit point of the workflow",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-envelope-open-text",
+    icon:"fas fa-eject",
     properties: [{
       name: 'stateCount',
       type:'number',

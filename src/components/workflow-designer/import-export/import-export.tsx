@@ -31,13 +31,13 @@ export class ImportExport {
 
     this.blobUrl = blobUrl = window.URL.createObjectURL(blob);
 
-    // const downloadLink = document.createElement('a');
-    // downloadLink.setAttribute('href', blobUrl);
-    // downloadLink.setAttribute('download', `kalpesh.${ formatDescriptor.fileExtension }`);
+    const downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href', blobUrl);
+    downloadLink.setAttribute('download', `${wfName}${ formatDescriptor.fileExtension }`);
 
-    // document.body.appendChild(downloadLink);
-    // downloadLink.click();
-    // document.body.removeChild(downloadLink);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
     // console.log("In export component");
     //alert("In import-export.tsx"+wfName);
     if(wfName != "" ){
