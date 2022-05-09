@@ -95,9 +95,6 @@ export class Designer {
       sNumber += 1;
     }
     workingId = activity.id;
-    
-
-    console.log("working Id " + workingId);
     this.lastClickedLocation = null;
 
     const activities = [...this.workflow.activities, activity];
