@@ -80,7 +80,6 @@ export class DesignerHost {
 
   @Method()
   async exportWorkflowData(){
-    
     return this.designer.workflow;
   }
 
