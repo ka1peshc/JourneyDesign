@@ -78,6 +78,7 @@ export namespace Components {
     'activityDefinitionsData': string;
     'canvasHeight': string;
     'export': (formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
+    'exportWorkflowData': () => Promise<Workflow>;
     'getWorkflow': () => Promise<any>;
     'import': () => Promise<void>;
     'newWorkflow': () => Promise<void>;
@@ -139,10 +140,6 @@ export namespace Components {
     'name': string;
     'syntax': string;
     'value': string;
-  }
-  interface WfTablesField {
-    'name': string;
-    'value': boolean;
   }
   interface WfTextField {
     'hint': string;
@@ -269,12 +266,6 @@ declare global {
     new (): HTMLWfSingleCriteriaFieldElement;
   };
 
-  interface HTMLWfTablesFieldElement extends Components.WfTablesField, HTMLStencilElement {}
-  var HTMLWfTablesFieldElement: {
-    prototype: HTMLWfTablesFieldElement;
-    new (): HTMLWfTablesFieldElement;
-  };
-
   interface HTMLWfTextFieldElement extends Components.WfTextField, HTMLStencilElement {}
   var HTMLWfTextFieldElement: {
     prototype: HTMLWfTextFieldElement;
@@ -300,7 +291,6 @@ declare global {
     'wf-number-field': HTMLWfNumberFieldElement;
     'wf-select-field': HTMLWfSelectFieldElement;
     'wf-single-criteria-field': HTMLWfSingleCriteriaFieldElement;
-    'wf-tables-field': HTMLWfTablesFieldElement;
     'wf-text-field': HTMLWfTextFieldElement;
   }
 }
@@ -419,11 +409,6 @@ declare namespace LocalJSX {
     'syntax'?: string;
     'value'?: string;
   }
-  interface WfTablesField extends JSXBase.HTMLAttributes<HTMLWfTablesFieldElement> {
-    'name'?: string;
-    'onDisplayWorkflow'?: (event: CustomEvent<Workflow>) => void;
-    'value'?: boolean;
-  }
   interface WfTextField extends JSXBase.HTMLAttributes<HTMLWfTextFieldElement> {
     'hint'?: string;
     'label'?: string;
@@ -451,7 +436,6 @@ declare namespace LocalJSX {
     'wf-number-field': WfNumberField;
     'wf-select-field': WfSelectField;
     'wf-single-criteria-field': WfSingleCriteriaField;
-    'wf-tables-field': WfTablesField;
     'wf-text-field': WfTextField;
   }
 }

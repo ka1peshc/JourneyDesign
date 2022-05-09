@@ -64,15 +64,10 @@ export class PrimitiveActivities implements WorkflowPlugin {
   private setCommunication = (): ActivityDefinition => ({
     type: "Communication",
     displayName: "Communication",
-    description: "Welcome to ",
+    description: "--Select communication--",
     category: PrimitiveActivities.Category,
     icon:"fas fa-envelope-open-text",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    },
+    properties: [
       {
       name: 'communication',
       type: 'communication',
@@ -90,11 +85,6 @@ export class PrimitiveActivities implements WorkflowPlugin {
     category: PrimitiveActivities.Category,
     icon:"fas fa-gift",
     properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    },{
       name: 'incentive',
       type: 'incentive',
       label: 'Incentive Expression',
@@ -110,12 +100,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     description: "Select criteria",
     category: PrimitiveActivities.Category,
     icon:"fas fa-filter",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    },
+    properties: [
       {
       name: 'singleCriteria',
       type: 'singleCriteria',
@@ -132,12 +117,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     description: "Add delay in workflow",
     category: PrimitiveActivities.Category,
     icon:"fas fa-clock",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    },
+    properties: [
       {
       name: 'delay',
       type: 'delay',
@@ -153,13 +133,8 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Enrolment",
     description: "Entry point of the workflow",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-envelope-open-text",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    }],
+    icon:"fas fa-sign-in-alt",
+    properties: [],
     runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b> ` : x.definition.description',
     outcomes: [OutcomeNames.Done]
   });
@@ -170,12 +145,7 @@ export class PrimitiveActivities implements WorkflowPlugin {
     description: "Exit point of the workflow",
     category: PrimitiveActivities.Category,
     icon:"fas fa-eject",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    }],
+    properties: [],
     runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b> ` : x.definition.description',
     outcomes: [OutcomeNames.Done]
   });
@@ -185,13 +155,8 @@ export class PrimitiveActivities implements WorkflowPlugin {
     displayName: "Multiple Criteria",
     description: "Select multiple criteria",
     category: PrimitiveActivities.Category,
-    icon:"fas fa-envelope-open-text",
-    properties: [{
-      name: 'stateCount',
-      type:'number',
-      label: 'State',
-      hint: 'Sequence number of node in flow chart.'
-    },
+    icon:"fas fa-code-branch",
+    properties: [
       {
       name: 'firstCriteria',
       type: 'firstCriteria',

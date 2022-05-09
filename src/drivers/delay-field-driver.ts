@@ -5,8 +5,7 @@ export class DelayFieldDriver implements FieldDriver {
     displayEditor = (activity: Activity, property: ActivityPropertyDescriptor): RenderResult => {
       const name = property.name;
       const label = property.label;
-      const value: WorkflowExpression = activity.state[name] || { expression: '', syntax: 'welcome to program' };
-      //const multiline: boolean = (property.options || {}).multiline || false;
+      const value: WorkflowExpression = activity.state[name] || { expression: '', syntax: 'Profile updated & 7 Days' };
       const expressionValue = value.expression.replace(/"/g, '&quot;');
   
       return `<wf-delay-field name="${name}" label="${label}" hint="${property.hint}" value="${expressionValue}" syntax="${value.syntax}"></wf-delay-field>`;

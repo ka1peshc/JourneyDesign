@@ -38,14 +38,17 @@ export class ImportExport {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-    // console.log("In export component");
-    //alert("In import-export.tsx"+wfName);
-    if(wfName != "" ){
-      this.sendWorkflow(data,wfName);
-    }
-    else{
+    
+    if(wfName == ""){
       alert("Enter workflow name");
     }
+
+    // if(wfName != "" ){
+    //   this.sendWorkflow(data,wfName);
+    // }
+    // else{
+    //   alert("Enter workflow name");
+    // }
     
   }
 
@@ -99,27 +102,27 @@ export class ImportExport {
     }
   };
 
-  private sendWorkflow = (data: string, titleName: string) => {
-    console.log("In send workflow");
-    console.log(data);
+  // private sendWorkflow = (data: string, titleName: string) => {
+  //   console.log("In send workflow");
+  //   console.log(data);
 
-    //API call post method
-    fetch("https://localhost:7003/api/JsonApi/SaveJsonData", {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "title": titleName,
-      "useCaseBody": JSON.parse(data)
-    }),
-    }).then(response => response.json())
-    // Displaying results to console
-    .then(json => {
-      console.log(json);
-      alert("successfully inserted record");
-    });
+  //   //API call post method
+  //   fetch("https://localhost:7003/api/JsonApi/SaveJsonData", {
+  //   method: "POST",
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({
+  //     "title": titleName,
+  //     "useCaseBody": JSON.parse(data)
+  //   }),
+  //   }).then(response => response.json())
+  //   // Displaying results to console
+  //   .then(json => {
+  //     console.log(json);
+  //     alert("successfully inserted record");
+  //   });
 
-  }
+  // }
 }

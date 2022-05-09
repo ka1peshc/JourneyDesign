@@ -48,6 +48,11 @@ export class DesignerHost {
   @Prop() workflowName: string = "workflow";
 
   @Method()
+  async exportWorkflowData(){ 
+    return this.designer.workflow;
+  }
+
+  @Method()
   setWorkflowName(name: string){
     this.workflowName = name;
     // alert("In designer host "+this.workflowName);

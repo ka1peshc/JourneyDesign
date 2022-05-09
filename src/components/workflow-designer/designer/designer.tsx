@@ -16,7 +16,10 @@ import ActivityManager from '../../../services/activity-manager';
 import {deepClone} from "../../../utils/deep-clone";
 
 
-let sNumber: number = 0;
+let sNumber: number = 1;
+let workingId: string;
+let activityIdList: string[] = [];
+let editCountClick: number = 0;
 
 @Component({
   tag: 'wf-designer',
@@ -78,8 +81,9 @@ export class Designer {
       top: top,
       left: left,
       type: activityDefinition.type,
-      state: {},
-      stateNumber: sNumber+1
+      state: {
+        stateCount: sNumber
+      }
     };
     sNumber += 1;
     this.lastClickedLocation = null;
@@ -90,6 +94,10 @@ export class Designer {
 
   @Method()
   async updateActivity(activity: Activity) {
+    if(!activityIdList.includes(activity.id) && activity.type != "Enrolment" && activity.type != "Eject"){
+      sNumber +=1
+      activityIdList.push(activity.id);
+    }
     await this.updateActivityInternal(activity);
   }
 
@@ -186,7 +194,32 @@ export class Designer {
   };
 
   private deleteActivity = async (activity: Activity) => {
-    const activities = this.workflow.activities.filter(x => x.id !== activity.id);
+    if ( activity.type == "Enrolment" || activity.type == "Eject"){
+      sNumber -= 1;
+    }
+
+    let WorkflowDelete = this.workflow;
+    let Slices: Activity;
+    let newWorkflowArray = [];
+    Slices = this.workflow.activities.find(x => x.id == activity.id);
+    let match = 0;
+    WorkflowDelete.activities.map((data, index)=>{
+      if (Slices.id === data.id){
+        match = 1;
+      }
+      else{
+        if( match == 1 ) {
+          let d = data;
+          d.state.stateCount = d.state.stateCount -1;
+          newWorkflowArray.push(d);
+        }
+        else {
+          newWorkflowArray.push(data);
+        }
+      }
+    })
+    
+    const activities = newWorkflowArray;
     const connections = this.workflow.connections.filter(x => x.sourceActivityId != activity.id && x.destinationActivityId != activity.id);
     this.workflow = { ...this.workflow, activities, connections };
   };
