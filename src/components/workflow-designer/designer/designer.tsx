@@ -25,6 +25,7 @@ let activityIdList: string[] = [];
   styleUrl: 'designer.scss',
   shadow: false
 })
+
 export class Designer {
 
   canvas: HTMLElement;

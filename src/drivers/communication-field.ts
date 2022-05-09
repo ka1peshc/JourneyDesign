@@ -5,7 +5,7 @@ export class CommunicationFieldDriver implements FieldDriver {
     displayEditor = (activity: Activity, property: ActivityPropertyDescriptor): RenderResult => {
       const name = property.name;
       const label = property.label;
-      const value: WorkflowExpression = activity.state[name] || { expression: '', syntax: 'welcome to program' };
+      const value: WorkflowExpression = activity.state[name] || { expression: '', syntax: '' };
       //const multiline: boolean = (property.options || {}).multiline || false;
       const expressionValue = value.expression.replace(/"/g, '&quot;');
   

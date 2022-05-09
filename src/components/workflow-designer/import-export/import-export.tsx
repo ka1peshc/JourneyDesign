@@ -46,6 +46,13 @@ export class ImportExport {
     else{
       alert("Enter workflow name");
     }
+
+    // if(wfName != "" ){
+    //   this.sendWorkflow(data,wfName);
+    // }
+    // else{
+    //   alert("Enter workflow name");
+    // }
     
   }
 

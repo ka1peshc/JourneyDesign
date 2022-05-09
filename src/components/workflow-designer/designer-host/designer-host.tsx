@@ -11,7 +11,7 @@ import {deepClone} from "../../../utils/deep-clone";
 // import '../../../plugins/http-activities';
 // import '../../../plugins/mass-transit-activities';
 import '../../../plugins/primitives-activities';
-import '../../../plugins/timer-activities';
+//import '../../../plugins/timer-activities';
 import {
   BooleanFieldDriver,
   CommunicationFieldDriver,
@@ -47,8 +47,9 @@ export class DesignerHost {
   @Prop({ attribute: "plugins" }) pluginsData: string;
   @Prop() workflowName: string = "workflow";
 
+  
   @Method()
-  async setWorkflowName(name: string){
+  setWorkflowName(name: string){
     this.workflowName = name;
   }
 
