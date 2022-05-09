@@ -80,7 +80,7 @@ export class ActivityRenderer {
     const activity = {...this.activity};
     const definition = this.activityDefinition;
     const properties = definition.properties;
-
+    
     for (const property of properties) {
       DisplayManager.updateEditor(activity, property, formData);
     }

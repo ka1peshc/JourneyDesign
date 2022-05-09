@@ -18,5 +18,11 @@ export const config: Config = {
   ],
   plugins: [
     sass()
-  ]
+  ],
+  bundles: [
+    { components: ['wf-helloworld'] }
+  ],
+  // collections: [
+  //   { name: '@stencil/router' }
+  // ]
 };

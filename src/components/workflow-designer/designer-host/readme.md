@@ -93,7 +93,6 @@ Type: `Promise<void>`
 ### Used by
 
  - [wf-json-viewer](..\..\view-json)
- - [wf-tables-field](..\..\display-json)
 
 ### Depends on
 
@@ -114,7 +113,6 @@ graph TD;
   wf-designer --> wf-context-menu-item
   wf-designer --> wf-activity-renderer
   wf-json-viewer --> wf-designer-host
-  wf-tables-field --> wf-designer-host
   style wf-designer-host fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

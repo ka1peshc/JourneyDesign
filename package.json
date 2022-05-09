@@ -1,6 +1,6 @@
 {
-  "name": "@workflow-designer-kc",
-  "version": "1.0.0",
+  "name": "workflow-designer-kcv2",
+  "version": "1.2.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,7 +12,7 @@
   "unpkg": "dist/elsa-workflow-designer/elsa-workflow-designer.js",
   "repository": {
     "type": "git",
-    "url":"https://github.com/ka1peshc/JourneyDesign.git"
+    "url": "https://github.com/ka1peshc/JourneyDesign.git"
   },
   "bugs": {
     "url": "https://github.com/ka1peshc/JourneyDesign/issues"

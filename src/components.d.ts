@@ -78,6 +78,7 @@ export namespace Components {
     'activityDefinitionsData': string;
     'canvasHeight': string;
     'export': (formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
+    'exportWorkflowData': () => Promise<Workflow>;
     'getWorkflow': () => Promise<any>;
     'import': () => Promise<void>;
     'newWorkflow': () => Promise<void>;
@@ -102,6 +103,7 @@ export namespace Components {
     'syntax': string;
     'value': string;
   }
+  interface WfHelloworld {}
   interface WfImportExport {
     'export': (designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
     'import': (data?: ImportedWorkflowData) => Promise<void>;
@@ -139,10 +141,6 @@ export namespace Components {
     'name': string;
     'syntax': string;
     'value': string;
-  }
-  interface WfTablesField {
-    'name': string;
-    'value': boolean;
   }
   interface WfTextField {
     'hint': string;
@@ -227,6 +225,12 @@ declare global {
     new (): HTMLWfExpressionFieldElement;
   };
 
+  interface HTMLWfHelloworldElement extends Components.WfHelloworld, HTMLStencilElement {}
+  var HTMLWfHelloworldElement: {
+    prototype: HTMLWfHelloworldElement;
+    new (): HTMLWfHelloworldElement;
+  };
+
   interface HTMLWfImportExportElement extends Components.WfImportExport, HTMLStencilElement {}
   var HTMLWfImportExportElement: {
     prototype: HTMLWfImportExportElement;
@@ -269,12 +273,6 @@ declare global {
     new (): HTMLWfSingleCriteriaFieldElement;
   };
 
-  interface HTMLWfTablesFieldElement extends Components.WfTablesField, HTMLStencilElement {}
-  var HTMLWfTablesFieldElement: {
-    prototype: HTMLWfTablesFieldElement;
-    new (): HTMLWfTablesFieldElement;
-  };
-
   interface HTMLWfTextFieldElement extends Components.WfTextField, HTMLStencilElement {}
   var HTMLWfTextFieldElement: {
     prototype: HTMLWfTextFieldElement;
@@ -293,6 +291,7 @@ declare global {
     'wf-designer-host': HTMLWfDesignerHostElement;
     'wf-export-button': HTMLWfExportButtonElement;
     'wf-expression-field': HTMLWfExpressionFieldElement;
+    'wf-helloworld': HTMLWfHelloworldElement;
     'wf-import-export': HTMLWfImportExportElement;
     'wf-incentive-field': HTMLWfIncentiveFieldElement;
     'wf-json-viewer': HTMLWfJsonViewerElement;
@@ -300,7 +299,6 @@ declare global {
     'wf-number-field': HTMLWfNumberFieldElement;
     'wf-select-field': HTMLWfSelectFieldElement;
     'wf-single-criteria-field': HTMLWfSingleCriteriaFieldElement;
-    'wf-tables-field': HTMLWfTablesFieldElement;
     'wf-text-field': HTMLWfTextFieldElement;
   }
 }
@@ -382,6 +380,7 @@ declare namespace LocalJSX {
     'syntax'?: string;
     'value'?: string;
   }
+  interface WfHelloworld extends JSXBase.HTMLAttributes<HTMLWfHelloworldElement> {}
   interface WfImportExport extends JSXBase.HTMLAttributes<HTMLWfImportExportElement> {
     'onImport-workflow'?: (event: CustomEvent<Workflow>) => void;
   }
@@ -419,11 +418,6 @@ declare namespace LocalJSX {
     'syntax'?: string;
     'value'?: string;
   }
-  interface WfTablesField extends JSXBase.HTMLAttributes<HTMLWfTablesFieldElement> {
-    'name'?: string;
-    'onDisplayWorkflow'?: (event: CustomEvent<Workflow>) => void;
-    'value'?: boolean;
-  }
   interface WfTextField extends JSXBase.HTMLAttributes<HTMLWfTextFieldElement> {
     'hint'?: string;
     'label'?: string;
@@ -444,6 +438,7 @@ declare namespace LocalJSX {
     'wf-designer-host': WfDesignerHost;
     'wf-export-button': WfExportButton;
     'wf-expression-field': WfExpressionField;
+    'wf-helloworld': WfHelloworld;
     'wf-import-export': WfImportExport;
     'wf-incentive-field': WfIncentiveField;
     'wf-json-viewer': WfJsonViewer;
@@ -451,7 +446,6 @@ declare namespace LocalJSX {
     'wf-number-field': WfNumberField;
     'wf-select-field': WfSelectField;
     'wf-single-criteria-field': WfSingleCriteriaField;
-    'wf-tables-field': WfTablesField;
     'wf-text-field': WfTextField;
   }
 }

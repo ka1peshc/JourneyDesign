@@ -31,13 +31,13 @@ export class ImportExport {
 
     this.blobUrl = blobUrl = window.URL.createObjectURL(blob);
 
-    // const downloadLink = document.createElement('a');
-    // downloadLink.setAttribute('href', blobUrl);
-    // downloadLink.setAttribute('download', `kalpesh.${ formatDescriptor.fileExtension }`);
+    const downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href', blobUrl);
+    downloadLink.setAttribute('download', `${wfName}${ formatDescriptor.fileExtension }`);
 
-    // document.body.appendChild(downloadLink);
-    // downloadLink.click();
-    // document.body.removeChild(downloadLink);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
     // console.log("In export component");
     //alert("In import-export.tsx"+wfName);
     if(wfName != "" ){
@@ -49,6 +49,7 @@ export class ImportExport {
     
   }
 
+  
   @Method()
   async import(data?: ImportedWorkflowData) {
 
@@ -100,9 +101,6 @@ export class ImportExport {
   };
 
   private sendWorkflow = (data: string, titleName: string) => {
-    console.log("In send workflow");
-    console.log(data);
-
     //API call post method
     fetch("https://localhost:7003/api/JsonApi/SaveJsonData", {
     method: "POST",
@@ -117,7 +115,7 @@ export class ImportExport {
     }).then(response => response.json())
     // Displaying results to console
     .then(json => {
-      console.log(json);
+      // console.log(json);
       alert("successfully inserted record");
     });
 

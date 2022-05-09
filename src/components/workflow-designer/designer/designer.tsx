@@ -15,6 +15,11 @@ import {Activity, ActivityDefinition, ActivityDisplayMode, Point, Workflow} from
 import ActivityManager from '../../../services/activity-manager';
 import {deepClone} from "../../../utils/deep-clone";
 
+
+let sNumber: number = 1;
+let workingId: string;
+let activityIdList: string[] = [];
+
 @Component({
   tag: 'wf-designer',
   styleUrl: 'designer.scss',
@@ -25,7 +30,7 @@ export class Designer {
   canvas: HTMLElement;
 
   constructor() {
-
+    
   }
 
   @Element()
@@ -63,20 +68,36 @@ export class Designer {
   async getWorkflow() {
     return deepClone(this.workflow);
   }
-
+   
   @Method()
   async addActivity(activityDefinition: ActivityDefinition) {
+    
     const left = !!this.lastClickedLocation ? this.lastClickedLocation.left : 150;
     const top = !!this.lastClickedLocation ? this.lastClickedLocation.top : 150;
-
+    // if ( activityDefinition.type == "Eject" || activityDefinition.type == "Enrolment"){
+    //   if( sNumber != 1){
+    //     sNumber += 1;
+    //   }
+    // }
     const activity: Activity = {
       id: uuid(),
       top: top,
       left: left,
       type: activityDefinition.type,
-      state: {}
+      state: {
+        stateCount: sNumber
+      }
     };
 
+    
+    if ( activity.type == "Enrolment" || activity.type == "Eject"){
+      activityIdList.push(activity.id);
+      sNumber += 1;
+    }
+    workingId = activity.id;
+    
+
+    console.log("working Id " + workingId);
     this.lastClickedLocation = null;
 
     const activities = [...this.workflow.activities, activity];
@@ -85,6 +106,11 @@ export class Designer {
 
   @Method()
   async updateActivity(activity: Activity) {
+    if(!activityIdList.includes(activity.id) && activity.type != "Enrolment" && activity.type != "Eject"){
+      sNumber +=1
+      activityIdList.push(activity.id);
+    }
+    
     await this.updateActivityInternal(activity);
   }
 
@@ -115,6 +141,7 @@ export class Designer {
 
   render() {
     const activities = this.createActivityModels();
+    
     return (
       <host class="workflow-canvas" ref={el => this.canvas = el} style={{ height: this.canvasHeight }}>
         {activities.map((model: ActivityModel) => {
@@ -166,7 +193,7 @@ export class Designer {
   private renderContextMenu = () => {
     if (this.readonly)
       return null;
-
+    
     return (
       [
         <wf-context-menu target={this.elem()}>
@@ -181,7 +208,34 @@ export class Designer {
   };
 
   private deleteActivity = async (activity: Activity) => {
-    const activities = this.workflow.activities.filter(x => x.id !== activity.id);
+    if ( activity.type == "Enrolment" || activity.type == "Eject"){
+      sNumber -= 1;
+    }
+
+    let WorkflowDelete = this.workflow;
+    let Slices: Activity;
+    let newWorkflowArray = [];
+    Slices = this.workflow.activities.find(x => x.id == activity.id);
+    let match = 0;
+    WorkflowDelete.activities.map((data, index)=>{
+      if (Slices.id === data.id){
+        match = 1;
+      }
+      else{
+        if( match == 1 ) {
+          let d = data;
+          d.state.stateCount = d.state.stateCount -1;
+          newWorkflowArray.push(d);
+        }
+        else {
+          newWorkflowArray.push(data);
+        }
+      }
+    })
+    WorkflowDelete.activities = newWorkflowArray;
+    
+    //const activities = this.workflow.activities.filter(x => x.id !== activity.id);
+    const activities = newWorkflowArray;
     const connections = this.workflow.connections.filter(x => x.sourceActivityId != activity.id && x.destinationActivityId != activity.id);
     this.workflow = { ...this.workflow, activities, connections };
   };

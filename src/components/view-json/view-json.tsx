@@ -11,16 +11,7 @@ export class DisplayWorkflow {
     activityDef: string = JSON.stringify([{"type": "Custom", "displayName": "Custom", "description": "Custom Activity", "category": "Custom", "designer": { "outcomes": ["Done"] }}]);
     @State() jsonWorkflow: Workflow;
     @State() title: string;
-    // @Listen('displayWorkflow', {target:'body'})
-    // displayWorkflowHandler(event: CustomEvent<Workflow>){
-    //     this.jsonWorkflow=event.detail;
-    //     this.workflowJson = JSON.stringify(this.jsonWorkflow);
-    // }
-
-    // componentWillRender(){
-    //     console.log("In component will render");
-    //     this.workflowJson = JSON.stringify(this.jsonWorkflow);
-    // }
+    
    
     render(){
         let xyz = '';

@@ -5,11 +5,11 @@ import "../../../drivers";
 import DisplayManager from '../../../services/display-manager';
 import pluginStore from '../../../services/workflow-plugin-store';
 import {deepClone} from "../../../utils/deep-clone";
-import '../../../plugins/console-activities';
-import '../../../plugins/control-flow-activities';
-import '../../../plugins/email-activities';
-import '../../../plugins/http-activities';
-import '../../../plugins/mass-transit-activities';
+// import '../../../plugins/console-activities';
+// import '../../../plugins/control-flow-activities';
+// import '../../../plugins/email-activities';
+// import '../../../plugins/http-activities';
+// import '../../../plugins/mass-transit-activities';
 import '../../../plugins/primitives-activities';
 import '../../../plugins/timer-activities';
 import {
@@ -48,9 +48,8 @@ export class DesignerHost {
   @Prop() workflowName: string = "workflow";
 
   @Method()
-  setWorkflowName(name: string){
+  async setWorkflowName(name: string){
     this.workflowName = name;
-    // alert("In designer host "+this.workflowName);
   }
 
   @Method()
@@ -76,6 +75,12 @@ export class DesignerHost {
   @Method()
   async import() {
     await this.importExport.import();
+  }
+
+  @Method()
+  async exportWorkflowData(){
+    
+    return this.designer.workflow;
   }
 
   @Listen('activity-picked')
@@ -116,16 +121,6 @@ export class DesignerHost {
     displayWorkflowHandler(event: CustomEvent<Workflow>){
         this.workflow = event.detail;
     }
-
-  // @Listen('InputWorkflow')
-  // async inputByTable(e: CustomEvent<Workflow>) {
-  //   this.designer.workflow = deepClone(e.detail);
-  // }
-
-  // @Listen('searchWorldNameSelected')
-  // async onDataFlow(e: CustomEvent<Workflow>){
-  //   this.designer.workflow = deepClone(e.detail);
-  // }
 
   @Event()
   workflowChanged: EventEmitter;

@@ -3,6 +3,7 @@ import { WorkflowPlugin } from "../models";
 import { ActivityDefinition } from "../models";
 import pluginStore from "../services/workflow-plugin-store";
 
+
 export class CommunicationActivities implements WorkflowPlugin {
     private static readonly Category: string = "Primitives";
 
