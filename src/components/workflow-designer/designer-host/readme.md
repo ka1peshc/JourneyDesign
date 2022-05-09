@@ -37,6 +37,16 @@ Type: `Promise<void>`
 
 
 
+### `exportWorkflowData() => Promise<Workflow>`
+
+
+
+#### Returns
+
+Type: `Promise<Workflow>`
+
+
+
 ### `getWorkflow() => Promise<any>`
 
 

@@ -103,7 +103,6 @@ export namespace Components {
     'syntax': string;
     'value': string;
   }
-  interface WfHelloworld {}
   interface WfImportExport {
     'export': (designer: HTMLWfDesignerElement, formatDescriptor: WorkflowFormatDescriptor, wfName: string) => Promise<void>;
     'import': (data?: ImportedWorkflowData) => Promise<void>;
@@ -225,12 +224,6 @@ declare global {
     new (): HTMLWfExpressionFieldElement;
   };
 
-  interface HTMLWfHelloworldElement extends Components.WfHelloworld, HTMLStencilElement {}
-  var HTMLWfHelloworldElement: {
-    prototype: HTMLWfHelloworldElement;
-    new (): HTMLWfHelloworldElement;
-  };
-
   interface HTMLWfImportExportElement extends Components.WfImportExport, HTMLStencilElement {}
   var HTMLWfImportExportElement: {
     prototype: HTMLWfImportExportElement;
@@ -291,7 +284,6 @@ declare global {
     'wf-designer-host': HTMLWfDesignerHostElement;
     'wf-export-button': HTMLWfExportButtonElement;
     'wf-expression-field': HTMLWfExpressionFieldElement;
-    'wf-helloworld': HTMLWfHelloworldElement;
     'wf-import-export': HTMLWfImportExportElement;
     'wf-incentive-field': HTMLWfIncentiveFieldElement;
     'wf-json-viewer': HTMLWfJsonViewerElement;
@@ -380,7 +372,6 @@ declare namespace LocalJSX {
     'syntax'?: string;
     'value'?: string;
   }
-  interface WfHelloworld extends JSXBase.HTMLAttributes<HTMLWfHelloworldElement> {}
   interface WfImportExport extends JSXBase.HTMLAttributes<HTMLWfImportExportElement> {
     'onImport-workflow'?: (event: CustomEvent<Workflow>) => void;
   }
@@ -438,7 +429,6 @@ declare namespace LocalJSX {
     'wf-designer-host': WfDesignerHost;
     'wf-export-button': WfExportButton;
     'wf-expression-field': WfExpressionField;
-    'wf-helloworld': WfHelloworld;
     'wf-import-export': WfImportExport;
     'wf-incentive-field': WfIncentiveField;
     'wf-json-viewer': WfJsonViewer;

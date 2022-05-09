@@ -49,7 +49,7 @@ export class DesignerHost {
 
   
   @Method()
-  setWorkflowName(name: string){
+  async setWorkflowName(name: string){
     this.workflowName = name;
   }
 
