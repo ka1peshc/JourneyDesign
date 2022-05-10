@@ -83,6 +83,7 @@ export class DesignerHost {
     return this.designer.workflow;
   }
 
+
   @Listen('activity-picked')
   async onActivityPicked(e: CustomEvent<ActivityDefinition>) {
     await this.designer.addActivity(e.detail);

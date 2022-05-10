@@ -72,14 +72,14 @@ export class Designer {
    
   @Method()
   async addActivity(activityDefinition: ActivityDefinition) {
+
+    if (this.workflow.activities.length !== 0){      
+      sNumber = this.workflow.activities.length+1;
+    }
     
     const left = !!this.lastClickedLocation ? this.lastClickedLocation.left : 150;
     const top = !!this.lastClickedLocation ? this.lastClickedLocation.top : 150;
-    // if ( activityDefinition.type == "Eject" || activityDefinition.type == "Enrolment"){
-    //   if( sNumber != 1){
-    //     sNumber += 1;
-    //   }
-    // }
+    
     const activity: Activity = {
       id: uuid(),
       top: top,
@@ -90,7 +90,7 @@ export class Designer {
       }
     };
 
-    
+    //previous logic
     if ( activity.type == "Enrolment" || activity.type == "Eject"){
       activityIdList.push(activity.id);
       sNumber += 1;
@@ -104,10 +104,11 @@ export class Designer {
 
   @Method()
   async updateActivity(activity: Activity) {
-    if(!activityIdList.includes(activity.id) && activity.type != "Enrolment" && activity.type != "Eject"){
-      sNumber +=1
-      activityIdList.push(activity.id);
-    }
+    //previous logic
+    // if(!activityIdList.includes(activity.id) && activity.type != "Enrolment" && activity.type != "Eject"){
+    //   sNumber +=1
+    //   activityIdList.push(activity.id);
+    // }
     
     await this.updateActivityInternal(activity);
   }
