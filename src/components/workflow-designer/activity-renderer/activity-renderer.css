@@ -1,1 +1,39 @@
-/* No CSS *//*# sourceMappingURL=activity-renderer.css.map */
+.fl-rw {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pd-lt {
+  padding-left: 16px;
+}
+
+.circleIcon {
+  position: absolute;
+  left: -26px;
+  background: #00B894;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.circleIcon .fas {
+  color: white;
+}
+/*# sourceMappingURL=activity-renderer.css.map */

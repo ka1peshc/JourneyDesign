@@ -15,7 +15,9 @@ export class PrimitiveActivities implements WorkflowPlugin {
       this.setDelay(),
       this.setEnrolment(),
       this.setEject(),
-      this.multipleCriteria()
+      this.seetMultipleCriteria(),
+      this.setOnline(),
+      this.setOffline()
     ]);
 
   private setCommunication = (): ActivityDefinition => ({
@@ -85,6 +87,23 @@ export class PrimitiveActivities implements WorkflowPlugin {
     outcomes: [OutcomeNames.Done]
   });
 
+  private seetMultipleCriteria = (): ActivityDefinition => ({
+    type: "Multiple Criteria",
+    displayName: "Multiple Criteria",
+    description: "Select multiple criteria",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-code-branch",
+    properties: [
+      {
+      name: 'multipleCriteria',
+      type: 'multipleCriteria',
+      label: 'Criteria Expression',
+      hint: 'Set of statements'
+    }],
+    runtimeDescription: 'x => !!x.state.multipleCriteria ? `<b>State: ${x.state.stateCount}</b><br/><strong>${ x.state.multipleCriteria.expression }</strong> ` : x.definition.description',
+    outcomes: [OutcomeNames.Done,OutcomeNames.Done]
+  });
+
   private setEnrolment = (): ActivityDefinition => ({
     type: "Enrolment",
     displayName: "Enrolment",
@@ -107,22 +126,29 @@ export class PrimitiveActivities implements WorkflowPlugin {
     outcomes: [OutcomeNames.Done]
   });
 
-  private multipleCriteria = (): ActivityDefinition => ({
-    type: "Multiple Criteria",
-    displayName: "Multiple Criteria",
-    description: "Select multiple criteria",
+  private setOnline = (): ActivityDefinition => ({
+    type: "Online",
+    displayName: "Online",
+    description: "User registor for online",
     category: PrimitiveActivities.Category,
     icon:"fas fa-code-branch",
-    properties: [
-      {
-      name: 'firstCriteria',
-      type: 'firstCriteria',
-      label: 'Criteria Expression',
-      hint: 'Set of statements'
-    }],
-    runtimeDescription: 'x => !!x.state.stateCount ? `<b>State: ${x.state.stateCount}</b>` : x.definition.description',
-    outcomes: [OutcomeNames.Done,OutcomeNames.Done]
+    properties: [],
+    runtimeDescription: 'Priority 1',
+    outcomes: [OutcomeNames.Done]
   });
+
+  private setOffline = (): ActivityDefinition => ({
+    type: "Offline",
+    displayName: "Offline",
+    description: "User registor for offline",
+    category: PrimitiveActivities.Category,
+    icon:"fas fa-code-branch",
+    properties: [],
+    runtimeDescription: 'Priority 2',
+    outcomes: [OutcomeNames.Done]
+  });
+
+  
 }
 
 pluginStore.add(new PrimitiveActivities());

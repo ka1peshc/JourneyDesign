@@ -121,6 +121,13 @@ export namespace Components {
     'label': string;
     'name': string;
   }
+  interface WfMultipleCriteriaField {
+    'hint': string;
+    'label': string;
+    'name': string;
+    'syntax': string;
+    'value': string;
+  }
   interface WfNumberField {
     'hint': string;
     'label': string;
@@ -248,6 +255,12 @@ declare global {
     new (): HTMLWfListFieldElement;
   };
 
+  interface HTMLWfMultipleCriteriaFieldElement extends Components.WfMultipleCriteriaField, HTMLStencilElement {}
+  var HTMLWfMultipleCriteriaFieldElement: {
+    prototype: HTMLWfMultipleCriteriaFieldElement;
+    new (): HTMLWfMultipleCriteriaFieldElement;
+  };
+
   interface HTMLWfNumberFieldElement extends Components.WfNumberField, HTMLStencilElement {}
   var HTMLWfNumberFieldElement: {
     prototype: HTMLWfNumberFieldElement;
@@ -288,6 +301,7 @@ declare global {
     'wf-incentive-field': HTMLWfIncentiveFieldElement;
     'wf-json-viewer': HTMLWfJsonViewerElement;
     'wf-list-field': HTMLWfListFieldElement;
+    'wf-multiple-criteria-field': HTMLWfMultipleCriteriaFieldElement;
     'wf-number-field': HTMLWfNumberFieldElement;
     'wf-select-field': HTMLWfSelectFieldElement;
     'wf-single-criteria-field': HTMLWfSingleCriteriaFieldElement;
@@ -389,6 +403,13 @@ declare namespace LocalJSX {
     'label'?: string;
     'name'?: string;
   }
+  interface WfMultipleCriteriaField extends JSXBase.HTMLAttributes<HTMLWfMultipleCriteriaFieldElement> {
+    'hint'?: string;
+    'label'?: string;
+    'name'?: string;
+    'syntax'?: string;
+    'value'?: string;
+  }
   interface WfNumberField extends JSXBase.HTMLAttributes<HTMLWfNumberFieldElement> {
     'hint'?: string;
     'label'?: string;
@@ -433,6 +454,7 @@ declare namespace LocalJSX {
     'wf-incentive-field': WfIncentiveField;
     'wf-json-viewer': WfJsonViewer;
     'wf-list-field': WfListField;
+    'wf-multiple-criteria-field': WfMultipleCriteriaField;
     'wf-number-field': WfNumberField;
     'wf-select-field': WfSelectField;
     'wf-single-criteria-field': WfSingleCriteriaField;

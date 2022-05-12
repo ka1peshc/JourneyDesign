@@ -19,6 +19,7 @@ import {
   ExpressionFieldDriver,
   IncentiveFieldDriver,
   ListFieldDriver,
+  MultipleCriteriaFieldDriver,
   SelectFieldDriver,
   SingleCriteriaFieldDriver,
   TextFieldDriver
@@ -162,6 +163,7 @@ export class DesignerHost {
     DisplayManager.addDriver('incentive',new IncentiveFieldDriver());
     DisplayManager.addDriver('singleCriteria',new SingleCriteriaFieldDriver());
     DisplayManager.addDriver('delay',new DelayFieldDriver());
+    DisplayManager.addDriver('multipleCriteria',new MultipleCriteriaFieldDriver());
   };
 
   private initWorkflow = () => {

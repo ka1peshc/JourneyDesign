@@ -43,8 +43,8 @@ export class DelayField {
     const name = this.name;
     const label = this.label;
     const hint = this.hint;
-    const syntaxes = ['Profile updated & 7 Days','Profile updated & 12 Days','Profile updated & 30 Days','15 Days','30 Days','others'];
-    const selectedSyntax = this.syntax || '';
+    const syntaxes = ['Profile updated & 7 Days','Profile updated & 12 Days','Profile updated & 30 Days','15 Days','30 Days','other'];
+    const selectedSyntax = this.syntax || 'other';
 
     return (
       <host>

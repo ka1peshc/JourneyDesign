@@ -8,3 +8,4 @@ export * from  './communication-field';
 export * from './incentive-field-driver';
 export * from './single-criteria-field-driver';
 export * from './delay-field-driver';
+export * from './multiple-criteria-field-driver';

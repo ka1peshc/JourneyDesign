@@ -1,8 +1,8 @@
 import { Component, h, Host, Prop, State, Watch } from '@stencil/core';
 
 @Component({
-    tag: 'wf-single-criteria-field',
-    styleUrl: 'single-criteria-field.scss',
+    tag: 'wf-multiple-criteria-field',
+    styleUrl: 'multiple-criteria-field.scss',
     shadow: false
 })
 
@@ -43,7 +43,7 @@ export class SingleCriteriaField {
     const name = this.name;
     const label = this.label;
     const hint = this.hint;
-    const syntaxes = ['Newsletter Opted','Profile Updated','other'];
+    const syntaxes = ['Online, Offline','other'];
     const selectedSyntax = this.syntax || 'other';
 
     return (

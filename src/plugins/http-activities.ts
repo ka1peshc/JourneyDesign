@@ -75,7 +75,7 @@ export class HttpActivities implements WorkflowPlugin {
         label: 'Read Content',
         hint: 'Check if the API request content body should be read and stored as part of the API request model. The stored format depends on the content-type header.'
       }],
-    runtimeDescription: `x => !!x.state.path ? \`Handle <strong>\${ x.state.method } \${ x.state.path }</strong>.\` : x.definition.description`,
+    runtimeDescription: `x => !!x.state.path ? \`<b>State: \${x.state.stateCount}</b><br/>Handle <strong>\${ x.state.method } \${ x.state.path }</strong>.\` : x.definition.description`,
     outcomes: [OutcomeNames.Done]
   });
 
@@ -121,7 +121,7 @@ export class HttpActivities implements WorkflowPlugin {
         hint: 'The headers to send along with the response. One \'header: value\' pair per line.',
         options: { multiline: true }
       }],
-    runtimeDescription: `x => !!x.state.statusCode ? \`Send an HTTP <strong>\${ x.state.statusCode }</strong><br/><br/> \${ x.state.contentType }</strong><br/>\${ !!x.state.content ? x.state.content.expression ? x.state.content.expression.substr(0,100) + '...' : '' : '' }\` : x.definition.description`,
+    runtimeDescription: `x => !!x.state.statusCode ? \`<b>State: \${x.state.stateCount}</b><br/>Send an HTTP <strong>\${ x.state.statusCode }</strong><br/><br/> \${ x.state.contentType }</strong><br/>\${ !!x.state.content ? x.state.content.expression ? x.state.content.expression.substr(0,100) + '...' : '' : '' }\` : x.definition.description`,
     outcomes: [OutcomeNames.Done]
   });
 }

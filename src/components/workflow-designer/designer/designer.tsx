@@ -19,6 +19,7 @@ import {deepClone} from "../../../utils/deep-clone";
 let sNumber: number = 1;
 let workingId: string;
 let activityIdList: string[] = [];
+let onlineOffflineList: string[] = [];
 
 @Component({
   tag: 'wf-designer',
@@ -74,7 +75,7 @@ export class Designer {
   async addActivity(activityDefinition: ActivityDefinition) {
 
     if (this.workflow.activities.length !== 0){      
-      sNumber = this.workflow.activities.length+1;
+      sNumber = this.workflow.activities.length - onlineOffflineList.length +1;
     }
     
     const left = !!this.lastClickedLocation ? this.lastClickedLocation.left : 150;
@@ -94,6 +95,9 @@ export class Designer {
     if ( activity.type == "Enrolment" || activity.type == "Eject"){
       activityIdList.push(activity.id);
       sNumber += 1;
+    }
+    if (activity.type == "Online" || activity.type == "Offline"){
+      onlineOffflineList.push(activity.id);
     }
     workingId = activity.id;
     this.lastClickedLocation = null;
@@ -211,29 +215,39 @@ export class Designer {
       sNumber -= 1;
     }
 
-    let WorkflowDelete = this.workflow;
-    let Slices: Activity;
-    let newWorkflowArray = [];
-    Slices = this.workflow.activities.find(x => x.id == activity.id);
-    let match = 0;
-    WorkflowDelete.activities.map((data, index)=>{
-      if (Slices.id === data.id){
-        match = 1;
-      }
-      else{
-        if( match == 1 ) {
-          let d = data;
-          d.state.stateCount = d.state.stateCount -1;
-          newWorkflowArray.push(d);
-        }
-        else {
-          newWorkflowArray.push(data);
-        }
-      }
-    })
-    WorkflowDelete.activities = newWorkflowArray;
+    if ( activity.type == "Online" || activity.type == "Offline"){
+      const start = onlineOffflineList.indexOf(activity.id);
+      const deletecount = 1;
+      onlineOffflineList.splice(start,deletecount);
+    }
+
+
     
-    //const activities = this.workflow.activities.filter(x => x.id !== activity.id);
+    
+      let WorkflowDelete = this.workflow;
+      let Slices: Activity;
+      let newWorkflowArray = [];
+      Slices = this.workflow.activities.find(x => x.id == activity.id);
+      let match = 0;
+      WorkflowDelete.activities.map((data, index)=>{
+        if (Slices.id === data.id){
+          match = 1;
+        }
+        else{
+          if( match == 1 ) {
+            let d = data;
+            if ( activity.type != "Online" && activity.type != "Offline"){
+              d.state.stateCount = d.state.stateCount -1;
+            }
+            newWorkflowArray.push(d);
+          }
+          else {
+            newWorkflowArray.push(data);
+          }
+        }
+      })
+      
+    
     const activities = newWorkflowArray;
     const connections = this.workflow.connections.filter(x => x.sourceActivityId != activity.id && x.destinationActivityId != activity.id);
     this.workflow = { ...this.workflow, activities, connections };
